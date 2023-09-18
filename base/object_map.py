@@ -6,9 +6,9 @@
 """
 import time
 
-from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.common.exceptions import ElementNotVisibleException, WebDriverException, NoSuchElementException, \
     StaleElementReferenceException
+from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.keys import Keys
 
 from common.yaml_config import GetConf
@@ -265,3 +265,21 @@ class ObjectMap:
         """
         window_handles = driver.window_handles  # 获取当前所有的句柄
         driver.switch_to.window(window_handles[-1])
+
+    def switch_into_iframe(self, driver: WebDriver, locate_iframe_type, locator_iframe_expression):
+        """
+        进入 IFrame
+        :param driver: 浏览器驱动
+        :param locate_iframe_type: IFrame 的定位方式
+        :param locator_iframe_expression: IFrame 的定位表达式
+        :return:
+        """
+        iframe = self.element_get(driver, locate_iframe_type, locator_iframe_expression)
+        driver.switch_to.frame(iframe)
+
+    def switch_from_iframe_to_content(self, driver: WebDriver):
+        """
+        从 iframe 切回主文档
+        :return:
+        """
+        driver.switch_to.parent_frame()

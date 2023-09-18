@@ -23,8 +23,3 @@ class LeftMenuBase:
         :return:
         """
         return "//aside[@class='el-aside']//span[text()='" + menu_name + "']/parent::li"
-
-
-if __name__ == '__main__':
-    print(LeftMenuBase().level_one_menu("产品"))
-    print(LeftMenuBase().level_two_menu("已买到的宝贝"))

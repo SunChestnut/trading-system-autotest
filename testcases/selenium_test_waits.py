@@ -18,7 +18,7 @@ def test_implicit():
     """
     driver.implicitly_wait(2)  # 2s
     driver.get("https://www.selenium.dev/selenium/web/dynamic.html")
-    driver.find_element(By.ID, "adder").click()
+    driver.find_element(By.ID, "adder").click_save()
 
     added = driver.find_element(By.ID, "box0")
     assert added.get_dom_attribute('class') == "redbox"
