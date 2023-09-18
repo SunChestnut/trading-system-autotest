@@ -8,8 +8,6 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.core.driver_cache import DriverCacheManager
 
-from common.tools import get_project_path, sep
-
 
 class DriverConfig:
     def driver_config(self) -> webdriver:
@@ -31,12 +29,7 @@ class DriverConfig:
         driver = webdriver.Chrome(
             service=ChromeService(
                 ChromeDriverManager(cache_manager=DriverCacheManager(root_dir=".", valid_range=365)).install()),
-            options=options)
-
-        # driver = webdriver.Chrome(
-        #     service=service.Service(
-        #         executable_path=get_project_path() + sep(["driver_files", "chromedriver"], add_sep_before=True)),
-        #     options=options)
+            options=options)  # 设置 webdriver_manager 所管理的浏览器驱动缓存有效期为 365 天
 
         # 删除所有cookies
         driver.delete_all_cookies()

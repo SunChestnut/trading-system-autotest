@@ -32,6 +32,17 @@ def sep(path: list[str], add_sep_before=False, add_sep_after=False) -> str:
     return all_path
 
 
+def get_img_path(img_name):
+    """
+    获取本地目录下存放的商品图片的路径
+    :param img_name: 图片名称
+    :return:
+    """
+    project_path = get_project_path()
+    return sep([project_path, "img", img_name], False, False)
+
+
 if __name__ == '__main__':
-    print(get_project_path())
-    sep(["config", "environment.yaml"], True, True)
+    # print(get_project_path())
+    # print(sep(["config", "environment.yaml"], True, True))
+    print(get_img_path("img-01.jpg"))

@@ -17,13 +17,17 @@ class GetConf:
             # print(type(self.env["mysql"]), self.env["mysql"])
             # print(self.env["mysql"]["db"])
 
-    def get_username_password(self):
-        return self.env["username"], self.env["password"]
+    def get_username_password(self, user_info):
+        return self.env["users"][user_info]["username"], self.env["users"][user_info]["password"]
 
     def get_mysql(self):
         return self.env["mysql"]
 
+    def get_url(self):
+        return self.env["url"]
+
 
 if __name__ == '__main__':
-    print(GetConf().get_username_password())
+    print("username & password:", GetConf().get_username_password("zjl"))  # zjl,周杰伦
     print(GetConf().get_mysql())
+    print(GetConf().get_url())

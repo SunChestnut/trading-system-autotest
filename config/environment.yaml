@@ -1,5 +1,7 @@
-username: 周杰伦
-password: 1234abcd!
+users:
+  zjl:
+    username: 周杰伦
+    password: 1234abcd!
 
 mysql:
   db: autotest
@@ -7,3 +9,6 @@ mysql:
   password: 123456
   port: 3306
   user: root
+
+
+url: http://192.168.56.20
