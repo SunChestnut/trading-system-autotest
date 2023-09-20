@@ -9,6 +9,7 @@ import time
 from selenium.common.exceptions import ElementNotVisibleException, WebDriverException, NoSuchElementException, \
     StaleElementReferenceException
 from selenium.webdriver.chrome.webdriver import WebDriver
+from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 
 from common.yaml_config import GetConf
@@ -283,3 +284,14 @@ class ObjectMap:
         :return:
         """
         driver.switch_to.parent_frame()
+
+    def mouse_hover_to_element(self, driver: WebDriver, locate_type, locator_expression):
+        """
+        将鼠标悬浮到指定的元素上
+        :param driver:
+        :param locate_type:
+        :param locator_expression:
+        :return:
+        """
+        element = self.element_get(driver, locate_type, locator_expression)
+        ActionChains(driver).move_to_element(element).click().perform()

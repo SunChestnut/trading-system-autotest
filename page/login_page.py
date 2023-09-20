@@ -22,7 +22,6 @@ class LoginPage(LoginBase, ObjectMap):
         :return:
         """
         input_xpath = self.login_input(input_placeholder)
-        # return driver.find_element(By.XPATH, input_xpath).send_keys(input_value)
         return self.element_fill_value(driver, By.XPATH, input_xpath, input_value)
 
     def click_login(self, driver: WebDriver, button_name):
@@ -33,7 +32,6 @@ class LoginPage(LoginBase, ObjectMap):
         :return:
         """
         login_button = self.login_button(button_name)
-        # return driver.find_element(By.XPATH, login_button).click()
         return self.element_click(driver, By.XPATH, login_button)
 
     def login(self, driver: WebDriver, user_info):

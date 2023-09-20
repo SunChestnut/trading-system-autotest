@@ -21,9 +21,3 @@ class LoginBase:
         :return:
         """
         return "//span[text()='" + button_name + "']"
-
-
-if __name__ == '__main__':
-    print(LoginBase().login_input("用户名"))
-    print(LoginBase().login_input("密码"))
-    print(LoginBase().login_button("登录"))

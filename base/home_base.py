@@ -50,3 +50,24 @@ class HomeBase:
         :return:
         """
         return "//span[text()='我的地址']/ancestor::div[@class='first_card']/div[contains(@class,'avatar')]//img"
+
+    def right_top_avatar(self):
+        """
+        返回表示首页右上角头像的元素定位
+        :return:
+        """
+        return "//div[@class='el-row']"
+
+    def logout_button(self):
+        """
+        右上角头像 -> 退出登录 tab
+        :return:
+        """
+        return "//li[text()='退出登录']"
+
+    def personal_profile(self):
+        """
+        右上角头像 -> 个人资料
+        :return:
+        """
+        return "//li[text()='个人资料']"

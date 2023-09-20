@@ -5,7 +5,6 @@
 
 from time import sleep
 
-from config.driver_config import DriverConfig
 from page.iframe_baidu_map_page import IframeBaiduMapPage
 from page.left_menu_page import LeftMenuPage
 from page.login_page import LoginPage
@@ -13,21 +12,18 @@ from page.login_page import LoginPage
 
 class TestIframeBaiduMap:
 
-    def test_baidu_map_search_button(self):
-        driver = DriverConfig().driver_config()
-        LoginPage().login(driver, "zjl")
+    def test_baidu_map_search_button(self, chrome_driver):
+        LoginPage().login(chrome_driver, "zjl")
         sleep(1)
 
-        LeftMenuPage().click_level_one_menu(driver, "iframe测试")
+        LeftMenuPage().click_level_one_menu(chrome_driver, "iframe测试")
         sleep(1)
 
-        IframeBaiduMapPage().switch_to_baidu_map_iframe(driver)
-        IframeBaiduMapPage().input_search_box(driver, "北京")
-        IframeBaiduMapPage().get_baidu_map_search_button(driver)
+        IframeBaiduMapPage().switch_to_baidu_map_iframe(chrome_driver)
+        IframeBaiduMapPage().input_search_box(chrome_driver, "北京")
+        IframeBaiduMapPage().get_baidu_map_search_button(chrome_driver)
         sleep(3)
-        IframeBaiduMapPage().iframe_out(driver)
+        IframeBaiduMapPage().iframe_out(chrome_driver)
 
-        LeftMenuPage().click_level_one_menu(driver, "首页")
+        LeftMenuPage().click_level_one_menu(chrome_driver, "首页")
         sleep(1)
-
-        driver.quit()
