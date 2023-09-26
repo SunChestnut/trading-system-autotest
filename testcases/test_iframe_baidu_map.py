@@ -5,11 +5,14 @@
 
 from time import sleep
 
+import allure
+
 from page.iframe_baidu_map_page import IframeBaiduMapPage
 from page.left_menu_page import LeftMenuPage
 from page.login_page import LoginPage
 
 
+@allure.epic("iframe 测试")
 class TestIframeBaiduMap:
 
     def test_baidu_map_search_button(self, chrome_driver):

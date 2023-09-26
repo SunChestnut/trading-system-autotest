@@ -5,10 +5,13 @@
 
 from time import sleep
 
+import allure
+
 from page.home_page import HomePage
 from page.login_page import LoginPage
 
 
+@allure.epic("首页功能测试")
 class TestHomePage:
 
     def test_open_personal_profile_and_logout(self, chrome_driver):

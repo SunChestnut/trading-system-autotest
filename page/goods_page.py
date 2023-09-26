@@ -128,3 +128,19 @@ class GoodsPage(GoodsBase, ObjectMap):
         self.select_goods_status(driver, goods_status)
         self.click_bottom_button(driver, bottom_button_name)
         return True
+
+    def add_new_goods_list(self, driver: WebDriver, goods_list: dict):
+        """
+        新增二手商品
+        :param driver:  浏览器驱动
+        :param goods_list: 商品信息
+        :return:
+        """
+        self.input_goods_title(driver, goods_list["goods_title"])
+        self.input_goods_details(driver, goods_list["goods_details"])
+        self.select_goods_number(driver, goods_list["goods_num"])
+        self.upload_mutil_goods_images(driver, goods_list["goods_img_list"])
+        self.input_goods_price(driver, goods_list["goods_price"])
+        self.select_goods_status(driver, goods_list["goods_status"])
+        self.click_bottom_button(driver, goods_list["bottom_button_name"])
+        return True

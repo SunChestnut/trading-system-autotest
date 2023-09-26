@@ -7,24 +7,36 @@
 
 from time import sleep
 
-from config.driver_config import DriverConfig
-from page.login_page import LoginPage
-from page.left_menu_page import LeftMenuPage
+import allure
+
+from common.report_add_img import add_img_to_report
 from page.external_link_page import ExternalLinkPage
+from page.left_menu_page import LeftMenuPage
+from page.login_page import LoginPage
 
 
+@allure.epic("点击外链功能测试")
 class TestWindowHandle:
-    def test_switch_window_handles(self):
-        driver = DriverConfig().driver_config()
 
-        LoginPage().login(driver, "zjl")
-        sleep(2)
+    @allure.description("测试「点击外链」功能")
+    def test_switch_window_handles(self, chrome_driver):
+        """
+        通过 allure 设置测试步骤
+        ⚠️ 测试用例代码修改后，需重新生成测试报告，再启动 allure server
+        :param chrome_driver:
+        :return:
+        """
+        with allure.step("登录"):
+            LoginPage().login(chrome_driver, "zjl")
+            sleep(2)
+            add_img_to_report(chrome_driver, "login")
 
-        LeftMenuPage().click_level_one_menu(driver, "外链")
-        sleep(2)
+        with allure.step("点击外链"):
+            LeftMenuPage().click_level_one_menu(chrome_driver, "外链")
+            sleep(2)
+            add_img_to_report(chrome_driver, "click-external-link")
 
-        page_title = ExternalLinkPage().goto_external_page(driver)
-        print("Page title: ", page_title)
-        sleep(2)
-
-        driver.quit()
+        with allure.step("断言 title"):
+            page_title = ExternalLinkPage().goto_external_page(chrome_driver)
+            assert page_title == "慕课网-程序员的梦工厂"
+            sleep(2)

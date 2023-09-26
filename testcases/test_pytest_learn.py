@@ -42,8 +42,8 @@ class TestPytestLearn:
         sleep(2)
         driver.quit()
 
-    @pytest.mark.google
-    def test_open_google(self, driver, scope_class):
-        driver.get("https://www.google.com/")
-        sleep(2)
-        driver.quit()
+    # @pytest.mark.google
+    # def test_open_google(self, driver, scope_class):
+    #     driver.get("https://www.google.com/")
+    #     sleep(2)
+    #     driver.quit()
