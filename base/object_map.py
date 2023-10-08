@@ -12,6 +12,8 @@ from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 
+from common.find_img import FindImage
+from common.tools import get_img_path
 from common.yaml_config import GetConf
 
 
@@ -288,10 +290,28 @@ class ObjectMap:
     def mouse_hover_to_element(self, driver: WebDriver, locate_type, locator_expression):
         """
         将鼠标悬浮到指定的元素上
-        :param driver:
+        :param driver: 浏览器驱动
         :param locate_type:
         :param locator_expression:
         :return:
         """
         element = self.element_get(driver, locate_type, locator_expression)
         ActionChains(driver).move_to_element(element).click().perform()
+
+    def find_img_in_source(self, driver: WebDriver, img_name):
+        """
+        截图并在截图中查找图片
+        :param driver: 浏览器驱动
+        :param img_name:
+        :return:
+        """
+        # 截图后图片保存的路径
+        source_img_path = get_img_path(img_name, True, ["source_img"])
+        # 待匹配的图片的路径
+        search_img_path = get_img_path(img_name, True, ["search_img"])
+        # 截图并保存图片
+        driver.get_screenshot_as_file(source_img_path)
+        # 休眠以确保能将截图保存成功
+        time.sleep(3)
+        # 在原图中查找是否包含指定的图片，并返回信心值
+        return FindImage().get_confidence(source_img_path, search_img_path)
