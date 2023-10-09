@@ -1,20 +1,39 @@
-[tool.poetry]
+[build-system]
+requires = [
+    "setuptools"
+]
+build-backend = "setuptools.build_meta"
+
+[project]
 name = "trading-system-autotest"
 version = "0.0.1"
+authors = [
+    { name = "syl" }
+]
 description = "Autotest project"
-authors = ["syl"]
 
+requires-python = ">=3.10"
+dependencies = [
+    "selenium >= 4.11.2",
+    "seleniumbase >= 4.18.7",
+    "pytest >= 7.4.2",
+    "pytest-rerunfailures >= 12.0",
+    "pytest-assume >= 2.4.3",
+    "webdriver_manager >= 4.0.0",
+    "PyYAML >= 6.0.1",
+    # "pytest-testmon >=  2.0.12",
+    "aircv >= 1.4.6",
+    "opencv-python >= 4.8.0",
+    "allure-pytest >= 2.13.2",
+]
 
-[tool.poetry.dependencies]
-python = ">=3.10"
-selenium = ">=4.11.2"
-seleniumbase = ">=4.18.7"
-pytest = ">=7.4.2"
-pytest-rerunfailures = ">=12.0"
-pytest-assume = ">=2.4.3"
-webdriver_manager = ">=4.0.0"
-PyYAML = ">= 6.0.1"
-#pytest-testmon = ">= 2.0.12"
-aircv = ">=1.4.6"
-opencv-python = ">= 4.8.0"
-allure-pytest = ">= 2.13.2"
+[tool.setuptools.packages.find]
+exclude=[
+    "img",
+    "page",
+    "logs",
+    "base",
+    "config",
+    "common",
+    "testcases",
+]
