@@ -2,6 +2,9 @@ users:
   zjl:
     username: 周杰伦
     password: 1234abcd!
+  notExistUser:
+    username: BlueGlasses
+    password: 12345
 
 mysql:
   db: autotest

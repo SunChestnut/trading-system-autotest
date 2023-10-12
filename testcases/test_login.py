@@ -6,23 +6,39 @@
 from time import sleep
 
 import allure
+import pytest
 
+from common.report_add_img import add_img_to_report
 from page.login_page import LoginPage
 
 
 @allure.epic("登录测试")
 class TestLogin:
+
+    @pytest.mark.login
+    @allure.feature("登录")
+    @allure.description("登录成功")
     def test_login(self, chrome_driver):
+        """登录成功"""
         LoginPage().login(chrome_driver, "zjl")
         sleep(1)
 
-    def test_login_avatar(self, chrome_driver):
-        """
-        登录后对首页截图，并判断截图中的头像是否正确
-        :param chrome_driver:
-        :return:
-        """
-        LoginPage().login(chrome_driver, "zjl")
-        sleep(3)
-        # 若返回的信心值 > 0.9，表明头像正确
-        assert LoginPage().login_assert(chrome_driver, "avatar-screenshot.png") > 0.9
+    @pytest.mark.login
+    @allure.feature("登录")
+    @allure.description("登录失败测试")
+    def test_login_fail(self, chrome_driver):
+        """使用错误的账号登录"""
+        with allure.step("登录"):
+            LoginPage().login(chrome_driver, "notExistUser")
+            sleep(3)
+            add_img_to_report(chrome_driver, "登录")
+
+    @pytest.mark.login
+    @allure.feature("登录")
+    @allure.description("登录时使用验证码校验")
+    def test_login_with_captcha(self, chrome_driver):
+        """登录时候增加验证码校验"""
+        with allure.step("登录"):
+            LoginPage().login(chrome_driver, "zjl", True)
+            sleep(3)
+            add_img_to_report(chrome_driver, "登录")

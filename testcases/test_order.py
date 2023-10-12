@@ -7,10 +7,9 @@ from time import sleep
 
 import allure
 
-from config.driver_config import DriverConfig
-from page.login_page import LoginPage
-from page.left_menu_page import LeftMenuPage
-from page.order_page import OrderPage
+from page import LoginPage
+from page import LeftMenuPage
+from page import OrderPage
 
 
 @allure.epic("我的订单页测试")

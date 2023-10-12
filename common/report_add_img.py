@@ -22,3 +22,13 @@ def add_img_to_report(driver: WebDriver, step_name, need_sleep=True):
         sleep(2)
 
     allure.attach(driver.get_screenshot_as_png(), step_name + ".png", allure.attachment_type.PNG)
+
+
+def add_img_path_to_report(img_path, step_name):
+    """
+    将图片以附件的形式插入 allure 测试报告中
+    :param img_path:
+    :param step_name:
+    :return:
+    """
+    allure.attach.file(img_path, step_name, allure.attachment_type.PNG)

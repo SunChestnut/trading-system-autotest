@@ -10,9 +10,9 @@ from time import sleep
 import allure
 
 from common.report_add_img import add_img_to_report
-from page.external_link_page import ExternalLinkPage
-from page.left_menu_page import LeftMenuPage
-from page.login_page import LoginPage
+from page import ExternalLinkPage
+from page import LeftMenuPage
+from page import LoginPage
 
 
 @allure.epic("点击外链功能测试")

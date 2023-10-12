@@ -8,7 +8,7 @@ from time import sleep
 
 import pytest
 
-from config.driver_config import DriverConfig
+from config import DriverConfig
 
 
 class TestPytestLearn:

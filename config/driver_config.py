@@ -28,7 +28,7 @@ class DriverConfig:
 
         driver = webdriver.Chrome(
             service=ChromeService(
-                ChromeDriverManager(cache_manager=DriverCacheManager(root_dir=".", valid_range=365)).install()),
+                ChromeDriverManager(cache_manager=DriverCacheManager(root_dir="", valid_range=365)).install()),
             options=options)  # 设置 webdriver_manager 所管理的浏览器驱动缓存有效期为 365 天
 
         # 删除所有cookies

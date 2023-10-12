@@ -4,6 +4,8 @@
 @Author SunYL
 @Time 2023/9/15 14:10
 """
+import datetime
+import os.path
 import time
 
 from selenium.common.exceptions import ElementNotVisibleException, WebDriverException, NoSuchElementException, \
@@ -49,7 +51,7 @@ class ObjectMap:
                     break
                 pass
             time.sleep(0.1)
-        return ElementNotVisibleException("元素定位失败，定位方式：" + locate_type + " 定位表达式：" + locator_expression)
+        raise ElementNotVisibleException("元素定位失败，定位方式：" + locate_type + " 定位表达式：" + locator_expression)
 
     def wait_for_ready_state_complete(self, driver: WebDriver, timeout=30):
         """
@@ -315,3 +317,19 @@ class ObjectMap:
         time.sleep(3)
         # 在原图中查找是否包含指定的图片，并返回信心值
         return FindImage().get_confidence(source_img_path, search_img_path)
+
+    def element_screenshot(self, driver: WebDriver, locate_type, locator_expression):
+        """
+        元素截图
+        :param driver: 浏览器驱动
+        :param locate_type:
+        :param locator_expression:
+        :return:
+        """
+        ele_name = datetime.datetime.now().strftime("%Y%m%d%H%M%S") + ".png"
+        ele_img_dir_path = get_img_path(ele_name, True, ["img", "ele_screenshot"])
+        if not os.path.exists(ele_img_dir_path):
+            os.makedirs(ele_img_dir_path)
+        ele_path = ele_img_dir_path + ele_name
+        self.element_get(driver, locate_type, locator_expression).screenshot(ele_path)  # 没有返回值也能再接着调用别的函数❓
+        return ele_path

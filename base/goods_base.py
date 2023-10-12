@@ -23,7 +23,7 @@ class GoodsBase:
 
     def goods_number(self, plus: bool):
         """
-        设置商品数量，共两种方式，plus==True 时通过 +/- 号设置，否则直接在输入框内填入数值
+        设置商品数量，共两种方式，plu s==True 时通过 +/- 号设置，否则直接在输入框内填入数值
         :param plus: True -> 通过 +/- 号设置商品数量；False -> 通过输入框设置商品数量
         :return:
         """
@@ -68,3 +68,10 @@ class GoodsBase:
         :return:
         """
         return "//span[text()='" + button_name + "']/parent::button "
+
+    def add_goods_fail_toast(self):
+        """
+        添加商品失败后谈框中的错误信息
+        :return:
+        """
+        return "//p[text()='全局异常，未知错误']"
