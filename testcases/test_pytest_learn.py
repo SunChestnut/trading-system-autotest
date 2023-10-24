@@ -8,7 +8,7 @@ from time import sleep
 
 import pytest
 
-from config import DriverConfig
+from config.driver_config import driver_config
 
 
 class TestPytestLearn:
@@ -28,7 +28,7 @@ class TestPytestLearn:
         :return:
         """
         print("🥝init driver 🥝")
-        return DriverConfig().driver_config()
+        return driver_config()
 
     @pytest.mark.bing
     def test_open_bing(self, driver, scope_class):

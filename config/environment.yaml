@@ -1,17 +1,22 @@
+url: http://192.168.56.20
+
+mysql:
+  host: 192.168.56.20
+  db: trading_system
+  port: 3306
+  user: root
+  password: william
+
 users:
   zjl:
     username: 周杰伦
     password: 1234abcd!
+  syl:
+    username: syl
+    password: 34567
   notExistUser:
     username: BlueGlasses
     password: 12345
 
-mysql:
-  db: autotest
-  host: localhost
-  password: 123456
-  port: 3306
-  user: root
-
-
-url: http://192.168.56.20
+# 校园二手交易系统中，注册功能的注册码
+#register_code: !@1w2i3l4l5i6a7m8#$

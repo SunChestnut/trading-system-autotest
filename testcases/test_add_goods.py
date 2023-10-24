@@ -57,24 +57,21 @@ class TestAddGoods:
 
         GoodsPage().add_new_goods_list(chrome_driver, goods)
 
+    def test_add_goods_002(self, chrome_driver):
+        LoginPage().login(chrome_driver, "zjl")  # 登录
 
-def test_add_goods_002(self, chrome_driver):
-    LoginPage().login(chrome_driver, "zjl")  # 登录
+        LeftMenuPage().click_level_one_menu(chrome_driver, "产品")  # 点击左侧一级菜单栏中的「产品」
+        LeftMenuPage().click_level_two_menu(chrome_driver, "新增二手商品")  # 点击左侧一级菜单栏「产品」下的二级菜单「新增二手商品」
 
-    LeftMenuPage().click_level_one_menu(chrome_driver, "产品")  # 点击左侧一级菜单栏中的「产品」
-    LeftMenuPage().click_level_two_menu(chrome_driver, "新增二手商品")  # 点击左侧一级菜单栏「产品」下的二级菜单「新增二手商品」
+        GoodsPage().add_new_goods(chrome_driver, "《流畅的Python》",
+                                  "共包括上下两册",
+                                  8, ["fun-1.jpg", "fun-2.jpg"], 5999,
+                                  "上架", "提交")
+    @pytest.mark.parametrize("flaw_goods", flaw_goods_list)
+    def test_add_goods_fail(self, chrome_driver, flaw_goods):
+        LoginPage().login(chrome_driver, "zjl")
 
-    GoodsPage().add_new_goods(chrome_driver, "《流畅的Python》",
-                              "共包括上下两册",
-                              8, ["fun-1.jpg", "fun-2.jpg"], 5999,
-                              "上架", "提交")
+        LeftMenuPage().click_level_one_menu(chrome_driver, "产品")
+        LeftMenuPage().click_level_two_menu(chrome_driver, "新增二手商品")
 
-
-@pytest.mark.parametrize("flaw_goods", flaw_goods_list)
-def test_add_goods_fail(self, chrome_driver, flaw_goods):
-    LoginPage().login(chrome_driver, "zjl")
-
-    LeftMenuPage().click_level_one_menu(chrome_driver, "产品")
-    LeftMenuPage().click_level_two_menu(chrome_driver, "新增二手商品")
-
-    GoodsPage().add_new_goods_list(chrome_driver, flaw_goods)
+        GoodsPage().add_new_goods_list(chrome_driver, flaw_goods)

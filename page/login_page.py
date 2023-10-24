@@ -4,11 +4,13 @@
 """
 import time
 
+import requests
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 
 from base.login_base import LoginBase
 from base.object_map import ObjectMap
+from common.common_filed_enum import URL
 from common.ocr_identify import OcrIdentify
 from common.report_add_img import add_img_path_to_report
 from common.yaml_config import GetConf
@@ -49,8 +51,8 @@ class LoginPage(LoginBase, ObjectMap):
         :return:
         """
         autotest_log.info("跳转登录页")
-        self.element_to_url(driver, "/login")
-        username, password = GetConf().get_username_password(user_info=user_info)
+        self.element_to_url(driver, URL.LOGIN_PATH)
+        username, password = GetConf().get_username_password(user_info)
         self.login_input_value(driver, "用户名", username)
         self.login_input_value(driver, "密码", password)
         if need_captcha:
@@ -67,6 +69,26 @@ class LoginPage(LoginBase, ObjectMap):
             time.sleep(3)
         self.click_login(driver, "登录")
         self.assert_login_assert(driver)
+
+    def api_login(self, driver: WebDriver, user_info):
+        """
+        通过 api 登录
+        :param driver: 浏览器驱动
+        :param user_info: 配置文件中设置的用户信息
+        :return:
+        """
+        autotest_log.info("跳转登录页")
+        self.element_to_url(driver, URL.LOGIN_PATH)
+        # 通过调用登录 API 获取 Token
+        request_url = GetConf().get_url() + URL.LOGIN_API
+        username, password = GetConf().get_username_password(user_info)
+        data = {"user": username, "password": password}
+        response = requests.post(request_url, json=data)
+        token = response.json()["data"]["token"]
+        set_local_storage_script = "window.sessionStorage.setItem('token','%s')" % token
+        driver.execute_script(set_local_storage_script)
+        time.sleep(2)
+        self.element_to_url(driver, URL.ROOT_PATH)
 
     def login_assert(self, driver: WebDriver, img_name: str):
         """

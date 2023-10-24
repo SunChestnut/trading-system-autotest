@@ -34,3 +34,12 @@ class HomePage(HomeBase, ObjectMap):
 
         logout_xpath = self.logout_button()
         return self.element_click(driver, By.XPATH, logout_xpath)
+
+    def get_user_balance(self, driver: WebDriver):
+        """
+        获取账户余额
+        :param driver:
+        :return:
+        """
+        balance_xpath = self.user_balance()
+        return self.element_get(driver, By.XPATH, balance_xpath).text

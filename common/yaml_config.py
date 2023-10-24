@@ -4,6 +4,7 @@
 """
 
 import yaml
+
 from common.tools import get_project_path, sep
 
 
@@ -13,9 +14,6 @@ class GetConf:
         with open(get_project_path() + sep(["config", "environment.yaml"], add_sep_before=True), "r",
                   encoding="utf-8") as env_file:
             self.env = yaml.load(env_file, Loader=yaml.FullLoader)
-            # print(type(self.env))  # output: <class 'dict'>
-            # print(type(self.env["mysql"]), self.env["mysql"])
-            # print(self.env["mysql"]["db"])
 
     def get_username_password(self, user_info):
         return self.env["users"][user_info]["username"], self.env["users"][user_info]["password"]
@@ -26,8 +24,5 @@ class GetConf:
     def get_url(self):
         return self.env["url"]
 
-
-if __name__ == '__main__':
-    print("username & password:", GetConf().get_username_password("zjl"))  # zjl,周杰伦
-    print(GetConf().get_mysql())
-    print(GetConf().get_url())
+    def get_mysql_config(self):
+        return self.env["mysql"]

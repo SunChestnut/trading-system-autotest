@@ -71,3 +71,10 @@ class HomeBase:
         :return:
         """
         return "//li[text()='个人资料']"
+
+    def user_balance(self):
+        """
+        首页中的账户余额
+        :return:
+        """
+        return "//div[@id='app']//th[text()='账户余额']/parent::tr/following-sibling::tr/td[1]"
